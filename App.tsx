@@ -1,18 +1,15 @@
 'use strict';
 
 import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import Login from './src/screens/Login';
-
-
+import {NavigationContainer} from '@react-navigation/native';
+import MainStack from './src/navigation/MainStack';
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Login/>
+      <MainStack />
     </NavigationContainer>
-  )
-}
+  );
+};
 
-export default App
-
+export default App;

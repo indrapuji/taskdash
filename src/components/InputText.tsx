@@ -27,7 +27,7 @@ export default InputText;
 const styles = StyleSheet.create({
   input: {
     height: 50,
-    margin: 10,
+    margin: 5,
     borderWidth: 1,
     width: screenWidth - 60,
     padding: 10,
