@@ -30,41 +30,39 @@ const Login = () => {
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}>
-      <View style={styles.container}>
-        <View style={styles.imageContainer}>
-          <Image
-            style={styles.tinyLogo}
-            source={require('../assets/images/taskdask_icon.png')}
-          />
-          <Text style={styles.headlines}>Welcome to TaskDash</Text>
-          <Text style={styles.subtext}>
-            Organize your day, one task at a time
-          </Text>
-        </View>
+      <View style={styles.imageContainer}>
+        <Image
+          style={styles.tinyLogo}
+          source={require('../assets/images/taskdask_icon.png')}
+        />
+        <Text style={styles.headlines}>Welcome to TaskDash</Text>
+        <Text style={styles.subtext}>
+          Organize your day, one task at a time
+        </Text>
+      </View>
 
-        <View style={styles.inputContainer}>
-          <InputText
-            options={{
-              value: userName,
-              onChangeText: t => setUserName(t),
-              placeholder: 'username',
-            }}
-          />
-          <InputText
-            options={{
-              value: password,
-              onChangeText: t => setPassword(t),
-              secureTextEntry: true,
-              placeholder: 'password',
-            }}
-          />
-          <MainButton title={'Login'} onPress={loginButton} />
-          <View style={styles.signUpContainer}>
-            <Text>Don’t have an account?</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-              <Text style={styles.signUpText}>Sign Up</Text>
-            </TouchableOpacity>
-          </View>
+      <View style={styles.inputContainer}>
+        <InputText
+          options={{
+            value: userName,
+            onChangeText: t => setUserName(t),
+            placeholder: 'username',
+          }}
+        />
+        <InputText
+          options={{
+            value: password,
+            onChangeText: t => setPassword(t),
+            secureTextEntry: true,
+            placeholder: 'password',
+          }}
+        />
+        <MainButton title={'Login'} onPress={loginButton} />
+        <View style={styles.signUpContainer}>
+          <Text>Don’t have an account?</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+            <Text style={styles.signUpText}>Sign Up</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </KeyboardAvoidingView>
