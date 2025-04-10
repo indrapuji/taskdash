@@ -20,10 +20,8 @@ const Login = () => {
 
   const navigation = useNavigation<RootScreenNavigationProp>();
 
-  console.log(userName);
-
   const loginButton = () => {
-    console.log('login');
+    navigation.navigate('Home');
   };
 
   return (
@@ -102,6 +100,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
+    marginTop: 20,
     marginBottom: 30,
   },
   signUpText: {
