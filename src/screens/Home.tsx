@@ -1,4 +1,5 @@
 import {
+  FlatList,
   Image,
   ScrollView,
   StyleSheet,
@@ -10,12 +11,61 @@ import React from 'react';
 import {hasNotch} from '../utility/DeviceInfo';
 import {Fonts} from '../styles/fonts';
 import {Colors} from '../styles/colors';
+import TaskCard from '../components/TaskCard';
+
+const taskData = [
+  {
+    id: 1,
+    prority: 3,
+    desc: 'ini file priority',
+    status: 'Pending',
+  },
+  {
+    id: 2,
+    prority: 3,
+    desc: 'ini file normal',
+    status: 'In Progress',
+  },
+  {
+    id: 3,
+    prority: 2,
+    desc: 'ini file low',
+    status: 'Completed',
+  },
+  {
+    id: 4,
+    prority: 3,
+    desc: 'ini file priority',
+    status: 'Canceled',
+  },
+  {
+    id: 5,
+    prority: 1,
+    desc: 'ini file normal',
+    status: 'Pending',
+  },
+  {
+    id: 6,
+    prority: 2,
+    desc: 'ini file low',
+    status: 'Pending',
+  },
+];
 
 const Home = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>TaskDash</Text>
+      <View style={styles.headContainer}>
+        <Image
+          style={{width: 30, height: 30}}
+          source={require('../assets/images/taskdask_icon.png')}
+        />
+        <TouchableOpacity>
+          <Image
+            style={{width: 30, height: 30}}
+            source={require('../assets/icon/menu.png')}
+          />
+        </TouchableOpacity>
       </View>
       <TouchableOpacity
         onPress={() => console.log('add')}
@@ -27,16 +77,19 @@ const Home = () => {
           />
         </View>
       </TouchableOpacity>
-      <ScrollView
-        style={{
-          margin: 16,
-        }}>
-        <View style={{backgroundColor: 'white', padding: 10, borderRadius: 10}}>
-          <Text style={{fontSize: 20, fontFamily: Fonts.poppinsSemibold}}>
-            Project
-          </Text>
-        </View>
-      </ScrollView>
+      <FlatList
+        style={{paddingTop: 10}}
+        data={taskData}
+        keyExtractor={(item, i) => `item${i}`}
+        renderItem={({item, index}) => (
+          <TaskCard
+            priority={item.prority}
+            index={index}
+            desc={item.desc}
+            status={item.status}
+          />
+        )}
+      />
     </View>
   );
 };
@@ -46,11 +99,14 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
-    marginTop: hasNotch ? 60 : 20,
+    paddingTop: hasNotch ? 60 : 20,
+    backgroundColor: 'white',
   },
-  titleContainer: {
-    alignItems: 'center',
+  headContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginHorizontal: 16,
+    marginVertical: 8,
   },
   title: {
     fontSize: 30,
@@ -60,7 +116,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 35,
     right: 25,
-    zIndex: 1,
+    zIndex: 2,
   },
   addIcon: {
     backgroundColor: Colors.baseColor,
