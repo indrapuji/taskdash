@@ -13,6 +13,7 @@ import InputText from '../components/InputText';
 import {useNavigation} from '@react-navigation/native';
 import MainButton from '../components/MainButton';
 import {RootScreenNavigationProp} from '../constant/stackTypes';
+import {Colors} from '../styles/colors';
 
 const Login = () => {
   const [userName, setUserName] = useState('');
@@ -22,6 +23,7 @@ const Login = () => {
 
   const loginButton = () => {
     navigation.navigate('Home');
+    console.log('masuk');
   };
 
   return (
@@ -105,7 +107,7 @@ const styles = StyleSheet.create({
   },
   signUpText: {
     marginLeft: 5,
-    color: '#7b4ccf',
+    color: Colors.baseColor,
     fontFamily: Fonts.poppinsSemibold,
   },
 });

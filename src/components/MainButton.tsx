@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import React, {FC} from 'react';
 import {Fonts} from '../styles/fonts';
+import {Colors} from '../styles/colors';
 
 const screenWidth = Dimensions.get('screen').width;
 
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
   button: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#7b4ccf',
+    backgroundColor: Colors.baseColor,
     height: 50,
     margin: 10,
     width: screenWidth - 60,
