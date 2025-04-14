@@ -1,18 +1,27 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Dimensions,
+} from 'react-native';
 import React, {FC} from 'react';
 import {Fonts} from '../styles/fonts';
 import {Colors} from '../styles/colors';
 
+const screenWidth = Dimensions.get('screen').width;
+
 interface priorityCard {
   priority: number;
   index: number;
+  title: string;
   desc: string;
   status: string;
 }
 
-const TaskCard: FC<priorityCard> = ({index, priority, desc, status}) => {
+const TaskCard: FC<priorityCard> = ({index, priority, title, desc, status}) => {
   return (
-    <View
+    <TouchableOpacity
       style={[
         styles.cardContainer,
         {
@@ -34,10 +43,20 @@ const TaskCard: FC<priorityCard> = ({index, priority, desc, status}) => {
         ]}
       />
       <View style={styles.textPosition}>
-        <Text style={styles.cardText}>{desc}</Text>
-        <Text style={styles.cardText}>{status}</Text>
+        <View style={{width: screenWidth / 2}}>
+          <Text numberOfLines={1} style={styles.cardText}>
+            {title}
+          </Text>
+          <Text numberOfLines={1} style={styles.cardSub}>
+            {desc}
+          </Text>
+        </View>
+        <View style={{alignItems: 'flex-end'}}>
+          <Text style={styles.cardText}>{status}</Text>
+          <Text style={styles.cardSub}>14 April</Text>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -50,12 +69,12 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
     position: 'relative',
-    height: 40,
+    height: 60,
     justifyContent: 'center',
   },
   cardLabel: {
     position: 'absolute',
-    height: 38,
+    height: 58,
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
   },
@@ -68,5 +87,10 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontFamily: Fonts.poppinsMedium,
     color: Colors.textCardColor,
+  },
+  cardSub: {
+    fontSize: 13,
+    fontFamily: Fonts.poppinsRegular,
+    color: Colors.textCardDisabled,
   },
 });
