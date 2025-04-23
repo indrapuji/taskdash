@@ -26,7 +26,7 @@ const BottomSheet: FC<bottoSheet> = ({onPress, loading, setOpenSheet}) => {
   const [prority, setPrority] = useState('');
   const [status, setStatus] = useState('');
 
-  const slide = useRef(new Animated.Value(300)).current;
+  const slide = useRef(new Animated.Value(400)).current;
 
   const slideUp = () => {
     // Will change fadeAnim value to 1 in 5 seconds
@@ -60,7 +60,7 @@ const BottomSheet: FC<bottoSheet> = ({onPress, loading, setOpenSheet}) => {
 
   return (
     <Pressable onPress={closeModal} style={styles.backDrop}>
-      <Pressable style={{width: '100%', height: screenHeight / 2.3}}>
+      <Pressable style={{width: '100%', height: 400}}>
         <Animated.View
           style={[styles.bottomSheet, {transform: [{translateY: slide}]}]}>
           <InputText
@@ -97,7 +97,7 @@ const BottomSheet: FC<bottoSheet> = ({onPress, loading, setOpenSheet}) => {
           />
           <View style={{marginTop: 15}}>
             <MainButton
-              onPress={onPress}
+              onPress={closeModal}
               loading={loading}
               title={'Add Task'}
             />
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   },
   bottomSheet: {
     width: screenWidth,
-    height: screenHeight / 2.3,
+    height: 400,
     backgroundColor: 'white',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,

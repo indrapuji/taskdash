@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Dimensions,
 } from 'react-native';
 import React, {useState} from 'react';
 import {hasNotch} from '../utility/DeviceInfo';
@@ -13,6 +14,8 @@ import {Colors} from '../styles/colors';
 import TaskCard from '../components/TaskCard';
 import taskData from '../data/taskData';
 import BottomSheet from '../components/BottomSheet';
+
+const screenHeight = Dimensions.get('screen').height;
 
 const Home = () => {
   const [openSheet, setOpenSheet] = useState(false);
@@ -23,9 +26,9 @@ const Home = () => {
 
   const HeaderComponent = () => {
     return (
-      <View style={{margin: 16}}>
+      <View style={{marginHorizontal: 16, marginVertical: 10}}>
         <Text style={{fontSize: 17, fontFamily: Fonts.poppinsSemibold}}>
-          Ongoing Task
+          {taskData.length} Ongoing Task
         </Text>
       </View>
     );
@@ -33,23 +36,53 @@ const Home = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.headContainer}>
+      {taskData.length > 0 ? (
         <View>
-          <Text style={{fontFamily: Fonts.poppinsMedium, fontSize: 19}}>
-            Welcome Indra
-          </Text>
-          <Text style={{fontFamily: Fonts.poppinsRegular, color: 'red'}}>
-            {`${taskData.length} Task Pending`}
+          <View style={styles.headContainer}>
+            <View>
+              <Text style={{fontFamily: Fonts.poppinsRegular, fontSize: 13}}>
+                Welcome
+              </Text>
+              <Text style={{fontFamily: Fonts.poppinsMedium, fontSize: 19}}>
+                Indra Puji Novirwan
+              </Text>
+            </View>
+            <TouchableOpacity>
+              <Image
+                style={{width: 30, height: 30}}
+                source={require('../assets/icon/menu.png')}
+              />
+            </TouchableOpacity>
+          </View>
+          <FlatList
+            ListHeaderComponent={HeaderComponent}
+            style={{paddingTop: 5}}
+            data={taskData}
+            keyExtractor={(item, i) => `item${i}`}
+            renderItem={({item, index}) => (
+              <TaskCard
+                priority={item.prority}
+                index={index}
+                title={item.title}
+                desc={item.desc}
+                status={item.status}
+              />
+            )}
+          />
+        </View>
+      ) : (
+        <View style={styles.centerImage}>
+          <Image
+            style={styles.clipboardImage}
+            source={require('../assets/images/clipboard.png')}
+          />
+          <Text style={styles.titleText}>You're all caught up!</Text>
+          <Text style={styles.subText}>
+            Nothing here right now. Start by adding your first task.
           </Text>
         </View>
+      )}
 
-        <TouchableOpacity>
-          <Image
-            style={{width: 30, height: 30}}
-            source={require('../assets/icon/menu.png')}
-          />
-        </TouchableOpacity>
-      </View>
       <TouchableOpacity
         onPress={() => setOpenSheet(true)}
         style={styles.addPosition}>
@@ -60,21 +93,6 @@ const Home = () => {
           />
         </View>
       </TouchableOpacity>
-      <FlatList
-        ListHeaderComponent={HeaderComponent}
-        style={{paddingTop: 10}}
-        data={taskData}
-        keyExtractor={(item, i) => `item${i}`}
-        renderItem={({item, index}) => (
-          <TaskCard
-            priority={item.prority}
-            index={index}
-            title={item.title}
-            desc={item.desc}
-            status={item.status}
-          />
-        )}
-      />
       {openSheet && (
         <BottomSheet
           onPress={addTask}
@@ -105,6 +123,26 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     fontFamily: Fonts.poppinsSemibold,
+  },
+  centerImage: {
+    height: screenHeight - 120,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  clipboardImage: {
+    width: 300,
+    height: 300,
+  },
+  titleText: {
+    fontFamily: Fonts.poppinsBold,
+    fontSize: 24,
+  },
+  subText: {
+    textAlign: 'center',
+    fontFamily: Fonts.poppinsRegular,
+    fontSize: 16,
+    paddingVertical: 16,
+    paddingHorizontal: 46,
   },
   addPosition: {
     position: 'absolute',
