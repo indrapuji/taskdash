@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View,
   Dimensions,
+  KeyboardAvoidingView,
 } from 'react-native';
 import React, {useState} from 'react';
 import {hasNotch} from '../utility/DeviceInfo';
@@ -82,7 +83,6 @@ const Home = () => {
           </Text>
         </View>
       )}
-
       <TouchableOpacity
         onPress={() => setOpenSheet(true)}
         style={styles.addPosition}>

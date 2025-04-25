@@ -1,4 +1,13 @@
-const taskData = [
+interface TaskData {
+  id: number;
+  prority: number;
+  category: number;
+  title: string;
+  desc: string;
+  status: string;
+}
+
+const taskData: TaskData[] = [
   {
     id: 1,
     prority: 3,
